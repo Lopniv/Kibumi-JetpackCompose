@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_acitivity_selected_navbar.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_acitivity_unselected_navbar.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_arrow_right.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_change_password.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_feature_inprogress.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_home_selected_navbar.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_home_unselected_navbar.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_item_pickup.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_keyboard_right.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_market_selected_navbar.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_market_unselected_navbar.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_pickup.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_piggy_bank.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_piggy_bank_selected_navbar.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_piggy_bank_unselected_navbar.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_profile.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_subscribe.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/icon_subscription.xml" value="0.1225" />
+        <entry key="..\:/Users/BRINESIA/StudioProjects/KibumiJetpack/app/src/main/res/drawable/logo_kibumi_white.xml" value="0.1225" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
