@@ -23,6 +23,8 @@ import com.compose.kibumi.feature.presentation.util.TopAppBarGeneral
 import com.compose.kibumi.ui.theme.LocalSpacing
 import com.compose.kibumi.ui.theme.THEME_TERTIARY_LIGHT
 import com.compose.kibumi.R
+import com.compose.kibumi.extension.convertToCurrency
+import com.compose.kibumi.extension.convertToStringThousandSeparator
 import com.compose.kibumi.feature.domain.`object`.getListSubscriptionPackage
 import com.compose.kibumi.feature.presentation.activity.ItemActivity
 import com.compose.kibumi.feature.presentation.util.Screen
@@ -88,7 +90,7 @@ fun ItemPackageSubscription(modelSubscriptionPackage: SubscriptionPackageModel, 
                 Spacer(modifier = Modifier.height(LocalSpacing.current.LITTLE))
                 Row(verticalAlignment = Alignment.CenterVertically)
                 {
-                    Text(text = "Rp. ${modelSubscriptionPackage.Price}", fontSize = LocalFontSize.current.MEDIUM, fontWeight = FontWeight.Bold)
+                    Text(text = modelSubscriptionPackage.Price?.convertToStringThousandSeparator()?.convertToCurrency() ?: "", fontSize = LocalFontSize.current.MEDIUM, fontWeight = FontWeight.Bold)
                     Text(text = " /month", fontSize = LocalFontSize.current.DEFAULT, color = THEME_TERTIARY_DARK)
                 }
             }

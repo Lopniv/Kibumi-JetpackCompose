@@ -6,6 +6,6 @@ data class SubscriptionPackageModel
     val Title: String? = null,
     val PickupDays: Int? = null,
     val PricePerKilos: Int? = null,
-    val Price: Int? = null,
+    val Price: Double? = null,
     val Icon: Int? = null
 )

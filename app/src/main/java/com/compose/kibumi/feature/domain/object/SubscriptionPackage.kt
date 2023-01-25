@@ -11,7 +11,7 @@ fun getListSubscriptionPackage(): MutableList<SubscriptionPackageModel>
             "Jemputin Hebat 2x",
             2,
             1000,
-            129000,
+            129000.0,
             R.drawable.icon_bronze
         ),
         SubscriptionPackageModel(
@@ -19,7 +19,7 @@ fun getListSubscriptionPackage(): MutableList<SubscriptionPackageModel>
             "Jemputin Hebat 3x",
             3,
             1500,
-            159000,
+            159000.0,
             R.drawable.icon_silver
         ),
         SubscriptionPackageModel(
@@ -27,7 +27,7 @@ fun getListSubscriptionPackage(): MutableList<SubscriptionPackageModel>
             "Jemputin Hebat 5x",
             6,
             1500,
-            255000,
+            255000.0,
             R.drawable.icon_gold
         ),
     )

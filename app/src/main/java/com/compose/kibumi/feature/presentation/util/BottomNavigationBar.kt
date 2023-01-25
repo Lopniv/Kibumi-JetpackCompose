@@ -27,6 +27,7 @@ import com.compose.kibumi.feature.presentation.market.MarketScreen
 import com.compose.kibumi.feature.presentation.savings.SavingsScreen
 import com.compose.kibumi.feature.presentation.subscription.DetailSubmissionScreen
 import com.compose.kibumi.feature.presentation.subscription.DetailSubscriptionPackageScreen
+import com.compose.kibumi.feature.presentation.payment.PaymentScreen
 import com.compose.kibumi.feature.presentation.subscription.SubscriptionPackageScreen
 import com.compose.kibumi.ui.theme.LocalSpacing
 import com.compose.kibumi.ui.theme.THEME_PRIMARY_NORMAL
@@ -185,21 +186,23 @@ fun MainScreenNavigation(
         }
 
         //detail submission
-        composable(route = Screen.DetailSubmission.route + "/{id}",
-            arguments = listOf(
-                navArgument("id")
-                {
-                    type = NavType.IntType
-                    defaultValue = 0
-                    nullable = false
-                }
-            ))
+        composable(route = Screen.DetailSubmission.route)
         {
             LaunchedEffect(Unit)
             {
                 bottomBarState.value = false
             }
-            DetailSubmissionScreen(navController, it.arguments?.getInt("id") ?: 0)
+            DetailSubmissionScreen(navController)
+        }
+
+        //payment
+        composable(Screen.Payment.route)
+        {
+            LaunchedEffect(Unit)
+            {
+                bottomBarState.value = false
+            }
+            PaymentScreen(navController)
         }
     }
 }

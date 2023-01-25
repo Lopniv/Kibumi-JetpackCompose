@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -21,6 +20,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.compose.kibumi.R
+import com.compose.kibumi.extension.convertToCurrency
+import com.compose.kibumi.extension.convertToStringThousandSeparator
 import com.compose.kibumi.feature.domain.`object`.getListSubscriptionPackage
 import com.compose.kibumi.feature.domain.model.SubscriptionPackageModel
 import com.compose.kibumi.feature.presentation.util.Screen
@@ -46,7 +47,7 @@ fun DetailSubscriptionPackageScreen(navController: NavController, idProduct: Int
         sheetElevation = LocalSpacing.current.SMALL,
         sheetContent =
         {
-            BottomSheet(navController, modelSubscriptionPackage, sheetState, scope)
+            BottomSheetDetailSubscription(navController, modelSubscriptionPackage, sheetState, scope)
         }
     ) {
         Column(
@@ -127,7 +128,7 @@ fun CardDetailPackage(modelPackage: SubscriptionPackageModel)
                     color = Color.White,
                     fontWeight = FontWeight.Bold)
                 Text(
-                    text = "Rp.${modelPackage.Price ?: ""}/Month",
+                    text = "${modelSubscriptionPackage.Price?.convertToStringThousandSeparator()?.convertToCurrency() ?: ""}/Month",
                     fontSize = LocalFontSize.current.MEDIUM,
                     color = Color.White,
                     fontWeight = FontWeight.Bold)
@@ -201,7 +202,7 @@ fun ItemList(intNumber: Int, stringText: String)
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BottomSheet(
+fun BottomSheetDetailSubscription(
     navController: NavController,
     modelSubscriptionPackage: SubscriptionPackageModel,
     sheetState: BottomSheetState,
@@ -236,7 +237,7 @@ fun BottomSheet(
                 scope.launch()
                 {
                     sheetState.collapse()
-                    navController.navigate(Screen.DetailSubmission.withArgs(modelSubscriptionPackage.ID.toString()))
+                    navController.navigate(Screen.DetailSubmission.route)
                 }
             })
         {

@@ -1,4 +1,4 @@
-package com.compose.kibumi
+package com.compose.kibumi.feature
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.compose.kibumi.R
 import com.compose.kibumi.feature.domain.model.MenuItemModel
 import com.compose.kibumi.feature.presentation.home.DialogSubscription
 import com.compose.kibumi.feature.presentation.util.*

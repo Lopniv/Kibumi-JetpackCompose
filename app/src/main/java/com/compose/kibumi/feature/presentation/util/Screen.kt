@@ -5,6 +5,7 @@ sealed class Screen(val route: String)
     object ProductSubscription: Screen("product_subscription")
     object DetailProductSubscription: Screen("detail_product")
     object DetailSubmission: Screen("detail_submission")
+    object Payment: Screen("payment")
 
     fun withArgs(vararg args: String): String
     {
