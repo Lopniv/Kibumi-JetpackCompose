@@ -16,7 +16,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.compose.kibumi.R
 import com.compose.kibumi.feature.domain.model.MenuItemModel
-import com.compose.kibumi.feature.presentation.home.DialogSubscription
+import com.compose.kibumi.feature.presentation.util.Dialog
 import com.compose.kibumi.feature.presentation.util.*
 import com.compose.kibumi.ui.theme.KibumiJetpackTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -38,12 +38,7 @@ class MainActivity : ComponentActivity()
 
                 val scaffoldState = rememberScaffoldState()
 
-                val openDialog = remember { mutableStateOf(false) }
-
-                if (openDialog.value)
-                {
-                    DialogSubscription(openDialog, navController)
-                }
+                val selectedIndex = remember { mutableStateOf(0) }
 
                 when(navBackStackEntry?.destination?.route)
                 {
@@ -66,7 +61,7 @@ class MainActivity : ComponentActivity()
                                     .fillMaxWidth(),
                                 backgroundColor = Color.Transparent
                             ) {
-                                BottomNav(navController = navController, bottomBarState)
+                                BottomNav(navController = navController, bottomBarState, selectedIndex)
                             }
                         }
                     },
@@ -96,7 +91,7 @@ class MainActivity : ComponentActivity()
                     },
                     drawerGesturesEnabled = drawerGestureState.value
                 ) {
-                    MainScreenNavigation(navController, bottomBarState, scaffoldState, openDialog)
+                    MainScreenNavigation(navController, bottomBarState, scaffoldState, selectedIndex)
                 }
             }
         }

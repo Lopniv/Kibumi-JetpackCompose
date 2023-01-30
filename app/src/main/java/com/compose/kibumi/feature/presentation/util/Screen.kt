@@ -6,6 +6,9 @@ sealed class Screen(val route: String)
     object DetailProductSubscription: Screen("detail_product")
     object DetailSubmission: Screen("detail_submission")
     object Payment: Screen("payment")
+    object SchedulePickup: Screen("schedule_pickup")
+    object WasteSell: Screen("waste_sell")
+    object Notification: Screen("notification")
 
     fun withArgs(vararg args: String): String
     {

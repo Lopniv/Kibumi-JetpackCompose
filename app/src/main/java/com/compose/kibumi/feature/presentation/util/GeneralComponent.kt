@@ -150,6 +150,10 @@ fun TopAppBarHome(navController: NavController, color: Color, scaffoldState: Sca
             )
             {
                 Image(
+                    modifier = Modifier.clickable()
+                    {
+                        navController.navigate(Screen.Notification.route)
+                    },
                     painter = painterResource(id = R.drawable.icon_bell), contentDescription = "Profile")
             }
         }
@@ -160,7 +164,12 @@ fun TopAppBarHome(navController: NavController, color: Color, scaffoldState: Sca
 
 
 @Composable
-fun TopAppBarGeneral(navController: NavController, stringTitle: String)
+fun TopAppBarGeneral(
+    navController: NavController,
+    stringTitle: String,
+    includedIconRight: Boolean = false,
+    iconRight: Int? = null,
+    iconClick: () -> Unit)
 {
     val scope = rememberCoroutineScope()
 
@@ -196,6 +205,27 @@ fun TopAppBarGeneral(navController: NavController, stringTitle: String)
                     fontWeight = FontWeight.Bold,
                     color = Color.White,
                     text = stringTitle)
+            }
+
+            if (includedIconRight)
+            {
+                Row(modifier = Modifier
+                        .padding(end = LocalSpacing.current.MEDIUM)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End)
+                {
+                    Image(
+                        modifier = Modifier
+                            .clickable
+                            {
+                                scope.launch()
+                                {
+                                    iconClick()
+                                }
+                            },
+                        painter = painterResource(id = iconRight ?: R.drawable.icon_null),
+                        contentDescription = "icon right")
+                }
             }
         }
     }

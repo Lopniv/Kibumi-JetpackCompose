@@ -39,11 +39,12 @@ fun SubscriptionPackageScreen(navController: NavController)
             .fillMaxSize()
             .background(THEME_TERTIARY_LIGHT)
     ) {
-        TopAppBarGeneral(navController = navController, "Subscription")
+        TopAppBarGeneral(navController = navController, "Subscription") { }
 
         val listPackage = getListSubscriptionPackage()
 
         LazyColumn(
+            contentPadding = PaddingValues(bottom = LocalSpacing.current.MEDIUM),
             modifier = Modifier.padding(LocalSpacing.current.LITTLE),
             content =
         {

@@ -10,6 +10,8 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -24,6 +26,9 @@ import androidx.compose.ui.util.lerp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.compose.kibumi.R
+import com.compose.kibumi.feature.presentation.util.BottomNavigationScreen
+import com.compose.kibumi.feature.presentation.util.Dialog
+import com.compose.kibumi.feature.presentation.util.Screen
 import com.compose.kibumi.feature.presentation.util.TopAppBarHome
 import com.compose.kibumi.ui.theme.LocalSpacing
 import com.compose.kibumi.ui.theme.THEME_PRIMARY_NORMAL
@@ -31,22 +36,44 @@ import com.google.accompanist.pager.*
 import kotlin.math.absoluteValue
 
 private val listBanner: MutableList<Int> = arrayListOf(R.drawable.image_banner, R.drawable.image_banner)
+var subscriptionPayment = 0
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun HomeScreen(
     navController: NavController,
-    scaffoldState: ScaffoldState,
-    openDialog: MutableState<Boolean>)
+    scaffoldState: ScaffoldState)
 {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(THEME_PRIMARY_NORMAL)
     ) {
+        val openDialog = remember { mutableStateOf(false) }
+
+        if (openDialog.value)
+        {
+            Dialog(
+                setShowDialog = openDialog,
+                image = R.drawable.icon_subscribe,
+                title = "You haven't subscribe yet",
+                subtitle = "Choose a subscription package to be able to enjoy Kibumi services",
+                positiveText = "Select Package",
+                negativeText = "Back",
+                positive =
+                {
+                    openDialog.value = false
+                    navController.navigate(Screen.ProductSubscription.route)
+                },
+                negative =
+                {
+                    openDialog.value = false
+                })
+        }
+
         TopAppBarHome(navController = navController, Color.Transparent, scaffoldState)
         ImageBackground()
-        MainHomeItem(openDialog)
+        MainHomeItem(openDialog, navController)
         BannerAutoSliding(list = listBanner)
     }
 }
@@ -130,7 +157,7 @@ fun BannerAutoSliding(list: MutableList<Int>)
 }
 
 @Composable
-fun MainHomeItem(openDialog: MutableState<Boolean>)
+fun MainHomeItem(openDialog: MutableState<Boolean>, navController: NavController)
 {
     Column(modifier = Modifier
         .fillMaxHeight()
@@ -145,7 +172,7 @@ fun MainHomeItem(openDialog: MutableState<Boolean>)
         ) {
             Column(modifier = Modifier.padding(top = 110.dp, bottom = 60.dp))
             {
-                SavingsLabel()
+                SavingsLabel(navController)
                 Text(
                     modifier = Modifier.fillMaxWidth(),
                     text = "Hey heroes, choose your service",
@@ -159,12 +186,19 @@ fun MainHomeItem(openDialog: MutableState<Boolean>)
                 ) {
                     CardService(modifier = Modifier.fillMaxWidth(0.5f), title = "Pickup", drawableIcon = R.drawable.icon_pickup)
                     {
-                        openDialog.value = true
+                        if (subscriptionPayment == 0)
+                        {
+                            openDialog.value = true
+                        }
+                        else
+                        {
+                            navController.navigate(Screen.SchedulePickup.route)
+                        }
                     }
 
                     CardService(modifier = Modifier.fillMaxWidth(), title = "Waste Sell", drawableIcon = R.drawable.icon_selling_trash)
                     {
-
+                        navController.navigate(Screen.WasteSell.route)
                     }
                 }
             }
@@ -173,11 +207,18 @@ fun MainHomeItem(openDialog: MutableState<Boolean>)
 }
 
 @Composable
-fun SavingsLabel()
+fun SavingsLabel(navController: NavController)
 {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable
+            {
+                navController.navigate(BottomNavigationScreen.Savings.route ?: "")
+                {
+                    popUpTo(0)
+                }
+            }
             .padding(horizontal = LocalSpacing.current.MEDIUM, vertical = LocalSpacing.current.LITTLE)
             .heightIn(50.dp),
         shape = RoundedCornerShape(LocalSpacing.current.LITTLE),

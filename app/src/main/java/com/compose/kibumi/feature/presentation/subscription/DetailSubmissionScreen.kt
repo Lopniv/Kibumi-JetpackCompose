@@ -40,7 +40,7 @@ fun DetailSubmissionScreen(navController: NavController)
                 .padding(bottom = LocalSpacing.current.BIG)
                 .verticalScroll(rememberScrollState())
         ) {
-            TopAppBarGeneral(navController = navController, "Detail Submission")
+            TopAppBarGeneral(navController = navController, "Detail Submission") { }
             ItemPackage(icon = R.drawable.icon_package, title = "Package", value = modelSubscriptionPackage.Title ?: "")
             ItemCounterSubscription { subscription.value = it }
             ItemPackage(icon = R.drawable.icon_monetization, title = "Payment method", value = "BRIVA")
@@ -239,7 +239,7 @@ fun OrderDetails(subscription: Int)
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(text = "Total", fontSize = LocalFontSize.current.SMALL, fontWeight = FontWeight.Bold)
-            Text(text = totalPrice?.convertToStringThousandSeparator()?.convertToCurrency() ?: "", fontSize = LocalFontSize.current.SMALL, fontWeight = FontWeight.Bold, color = THEME_PRIMARY_NORMAL)
+            Text(text = totalPrice.convertToStringThousandSeparator().convertToCurrency() ?: "", fontSize = LocalFontSize.current.SMALL, fontWeight = FontWeight.Bold, color = THEME_PRIMARY_NORMAL)
         }
     }
 }

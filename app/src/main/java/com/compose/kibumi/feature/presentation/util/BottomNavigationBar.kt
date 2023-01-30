@@ -24,11 +24,14 @@ import com.compose.kibumi.R
 import com.compose.kibumi.feature.presentation.activity.ActivityScreen
 import com.compose.kibumi.feature.presentation.home.HomeScreen
 import com.compose.kibumi.feature.presentation.market.MarketScreen
+import com.compose.kibumi.feature.presentation.notification.NotificationScreen
 import com.compose.kibumi.feature.presentation.savings.SavingsScreen
 import com.compose.kibumi.feature.presentation.subscription.DetailSubmissionScreen
 import com.compose.kibumi.feature.presentation.subscription.DetailSubscriptionPackageScreen
 import com.compose.kibumi.feature.presentation.payment.PaymentScreen
+import com.compose.kibumi.feature.presentation.pickup.SchedulePickupScreen
 import com.compose.kibumi.feature.presentation.subscription.SubscriptionPackageScreen
+import com.compose.kibumi.feature.presentation.wastesell.WasteSellScreen
 import com.compose.kibumi.ui.theme.LocalSpacing
 import com.compose.kibumi.ui.theme.THEME_PRIMARY_NORMAL
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -36,7 +39,8 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 @Composable
 fun BottomNav(
     navController: NavController,
-    bottomBarState: MutableState<Boolean>)
+    bottomBarState: MutableState<Boolean>,
+    selectedIndexState: MutableState<Int>)
 {
     val items = listOf(
         BottomNavigationScreen.Home, BottomNavigationScreen.Market, BottomNavigationScreen.Activity, BottomNavigationScreen.Savings
@@ -57,14 +61,12 @@ fun BottomNav(
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentRoute = navBackStackEntry?.destination
 
-                val selectedByIndex = remember { mutableStateOf(0) }
-
                 items.forEachIndexed { index, it ->
                     BottomNavigationItem(
                         icon = {
                             Icon(
                                 imageVector =
-                                if (selectedByIndex.value == index)
+                                if (selectedIndexState.value == index)
                                 {
                                     ImageVector.vectorResource(id = it.iconSelected ?: R.drawable.icon_null)
                                 }
@@ -88,7 +90,7 @@ fun BottomNav(
                         enabled = it.enabled,
 
                         onClick = {
-                            selectedByIndex.value = index
+                            selectedIndexState.value = index
                             it.route?.let { it1 ->
                                 navController.navigate(it1) {
                                     popUpTo(navController.graph.findStartDestination().id) {
@@ -112,7 +114,7 @@ fun MainScreenNavigation(
     navController: NavHostController,
     bottomBarState: MutableState<Boolean>,
     scaffoldState: ScaffoldState,
-    openDialog: MutableState<Boolean>)
+    selectedIndexState: MutableState<Int>)
 {
     NavHost(navController, startDestination = BottomNavigationScreen.Home.route!!)
     {
@@ -123,8 +125,9 @@ fun MainScreenNavigation(
             LaunchedEffect(Unit)
             {
                 bottomBarState.value = true
+                selectedIndexState.value = 0
             }
-            HomeScreen(navController, scaffoldState, openDialog)
+            HomeScreen(navController, scaffoldState)
         }
 
         //market
@@ -133,6 +136,7 @@ fun MainScreenNavigation(
             LaunchedEffect(Unit)
             {
                 bottomBarState.value = true
+                selectedIndexState.value = 1
             }
             MarketScreen(navController, scaffoldState)
         }
@@ -143,6 +147,7 @@ fun MainScreenNavigation(
             LaunchedEffect(Unit)
             {
                 bottomBarState.value = true
+                selectedIndexState.value = 2
             }
             ActivityScreen(navController, scaffoldState)
         }
@@ -153,6 +158,7 @@ fun MainScreenNavigation(
             LaunchedEffect(Unit)
             {
                 bottomBarState.value = true
+                selectedIndexState.value = 3
             }
             SavingsScreen(navController, scaffoldState)
         }
@@ -203,6 +209,36 @@ fun MainScreenNavigation(
                 bottomBarState.value = false
             }
             PaymentScreen(navController)
+        }
+
+        //schedule pickup
+        composable(Screen.SchedulePickup.route)
+        {
+            LaunchedEffect(Unit)
+            {
+                bottomBarState.value = false
+            }
+            SchedulePickupScreen(navController)
+        }
+
+        //waste sell
+        composable(Screen.WasteSell.route)
+        {
+            LaunchedEffect(Unit)
+            {
+                bottomBarState.value = false
+            }
+            WasteSellScreen(navController)
+        }
+
+        //notification
+        composable(Screen.Notification.route)
+        {
+            LaunchedEffect(Unit)
+            {
+                bottomBarState.value = false
+            }
+            NotificationScreen(navController)
         }
     }
 }

@@ -62,7 +62,7 @@ fun DetailSubscriptionPackageScreen(navController: NavController, idProduct: Int
                 }
             }
 
-            TopAppBarGeneral(navController = navController, "Detail Subscription")
+            TopAppBarGeneral(navController = navController, "Detail Subscription") { }
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState())
             ) {
@@ -215,6 +215,7 @@ fun BottomSheetDetailSubscription(
         Divider(modifier = Modifier
             .width(50.dp)
             .align(Alignment.CenterHorizontally), color = THEME_TERTIARY_LIGHT, thickness = 3.dp)
+        Spacer(modifier = Modifier.height(LocalSpacing.current.SMALL))
         Text(fontSize = LocalFontSize.current.MEDIUM, fontWeight = FontWeight.Bold, text = "Confirm")
         Text(fontSize = LocalFontSize.current.SMALL, text = "I hereby agree to the terms & conditions that apply.")
         Spacer(modifier = Modifier.height(LocalSpacing.current.SMALL))

@@ -6,6 +6,7 @@ import androidx.compose.ui.unit.sp
 
 data class FontSize
 (
+    val TINY: TextUnit = 10.sp,
     val DEFAULT: TextUnit = 12.sp,
     val SMALL: TextUnit = 14.sp,
     val MEDIUM: TextUnit = 16.sp,
