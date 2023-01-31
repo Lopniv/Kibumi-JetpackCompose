@@ -20,6 +20,8 @@ import com.compose.kibumi.feature.presentation.util.Dialog
 import com.compose.kibumi.feature.presentation.util.*
 import com.compose.kibumi.ui.theme.KibumiJetpackTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity()
 {
@@ -34,6 +36,7 @@ class MainActivity : ComponentActivity()
                 val bottomBarState = rememberSaveable { (mutableStateOf(false)) }
                 val drawerGestureState = rememberSaveable { (mutableStateOf(false)) }
                 val navController = rememberNavController()
+                val scope = rememberCoroutineScope()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
 
                 val scaffoldState = rememberScaffoldState()
@@ -80,8 +83,16 @@ class MainActivity : ComponentActivity()
                             {
                                 when(it.Id)
                                 {
-                                    "profile" -> return@DrawerBody
-                                    "subscription" -> return@DrawerBody
+                                    "profile" ->
+                                    {
+                                        navController.navigate(Screen.Profile.route)
+                                        closeDrawer(scope, scaffoldState)
+                                    }
+                                    "subscription" ->
+                                    {
+                                        navController.navigate(Screen.Address.route)
+                                        closeDrawer(scope, scaffoldState)
+                                    }
                                     "change_password" -> return@DrawerBody
                                     "help" -> return@DrawerBody
                                     "logout" -> return@DrawerBody
@@ -95,5 +106,13 @@ class MainActivity : ComponentActivity()
                 }
             }
         }
+    }
+}
+
+private fun closeDrawer(scope: CoroutineScope, scaffoldState: ScaffoldState)
+{
+    scope.launch()
+    {
+        scaffoldState.drawerState.close()
     }
 }

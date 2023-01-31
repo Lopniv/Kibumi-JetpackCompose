@@ -22,6 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.navArgument
 import com.compose.kibumi.R
 import com.compose.kibumi.feature.presentation.activity.ActivityScreen
+import com.compose.kibumi.feature.presentation.address.AddressScreen
 import com.compose.kibumi.feature.presentation.home.HomeScreen
 import com.compose.kibumi.feature.presentation.market.MarketScreen
 import com.compose.kibumi.feature.presentation.notification.NotificationScreen
@@ -30,6 +31,7 @@ import com.compose.kibumi.feature.presentation.subscription.DetailSubmissionScre
 import com.compose.kibumi.feature.presentation.subscription.DetailSubscriptionPackageScreen
 import com.compose.kibumi.feature.presentation.payment.PaymentScreen
 import com.compose.kibumi.feature.presentation.pickup.SchedulePickupScreen
+import com.compose.kibumi.feature.presentation.profile.ProfileScreen
 import com.compose.kibumi.feature.presentation.subscription.SubscriptionPackageScreen
 import com.compose.kibumi.feature.presentation.wastesell.WasteSellScreen
 import com.compose.kibumi.ui.theme.LocalSpacing
@@ -239,6 +241,26 @@ fun MainScreenNavigation(
                 bottomBarState.value = false
             }
             NotificationScreen(navController)
+        }
+
+        //profile
+        composable(Screen.Profile.route)
+        {
+            LaunchedEffect(Unit)
+            {
+                bottomBarState.value = false
+            }
+            ProfileScreen(navController)
+        }
+
+        //profile
+        composable(Screen.Address.route)
+        {
+            LaunchedEffect(Unit)
+            {
+                bottomBarState.value = false
+            }
+            AddressScreen(navController)
         }
     }
 }
