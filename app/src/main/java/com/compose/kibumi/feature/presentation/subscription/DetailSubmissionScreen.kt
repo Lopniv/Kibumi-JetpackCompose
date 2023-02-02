@@ -20,6 +20,7 @@ import com.compose.kibumi.feature.presentation.util.TopAppBarGeneral
 import com.compose.kibumi.R
 import com.compose.kibumi.extension.convertToCurrency
 import com.compose.kibumi.extension.convertToStringThousandSeparator
+import com.compose.kibumi.feature.presentation.util.ButtonBoxGeneral
 import com.compose.kibumi.feature.presentation.util.Screen
 import com.compose.kibumi.ui.theme.*
 import kotlinx.coroutines.launch
@@ -47,18 +48,9 @@ fun DetailSubmissionScreen(navController: NavController)
             ItemPackage(icon = R.drawable.icon_voucher, title = "Voucher", value = "BUMIKITA")
             OrderDetails(subscription.value)
         }
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(LocalSpacing.current.MEDIUM)
-                .align(Alignment.BottomCenter),
-            colors = ButtonDefaults.buttonColors(backgroundColor = THEME_PRIMARY_NORMAL),
-            onClick =
-            {
-                navController.navigate(Screen.Payment.route)
-            })
+        ButtonBoxGeneral(Modifier.align(Alignment.BottomCenter), "Pay")
         {
-            Text(text = "Pay", color = Color.White)
+            navController.navigate(Screen.Payment.route)
         }
     }
 }

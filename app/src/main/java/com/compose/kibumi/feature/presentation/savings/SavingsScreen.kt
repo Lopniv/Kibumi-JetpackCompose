@@ -1,6 +1,7 @@
 package com.compose.kibumi.feature.presentation.savings
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -18,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.compose.kibumi.feature.presentation.activity.ItemActivity
 import com.compose.kibumi.feature.presentation.home.ImageBackground
+import com.compose.kibumi.feature.presentation.util.Screen
 import com.compose.kibumi.feature.presentation.util.TopAppBarHome
 import com.compose.kibumi.ui.theme.*
 
@@ -33,13 +35,13 @@ fun SavingsScreen(
     ) {
         TopAppBarHome(navController = navController, Color.Transparent, scaffoldState)
         ImageBackground()
-        SavingsItem()
+        SavingsItem(navController)
         CoinLabel()
     }
 }
 
 @Composable
-fun SavingsItem()
+fun SavingsItem(navController: NavController)
 {
     Column(modifier = Modifier
         .fillMaxHeight()
@@ -70,7 +72,7 @@ fun SavingsItem()
                     LazyColumn(
                         content =
                         {
-                            itemsIndexed(arrayListOf(1,2,3,4,5))
+                            itemsIndexed(arrayListOf(0,1,2,3,4))
                             { _, _ ->
                                 ItemActivity()
                             }
@@ -85,7 +87,11 @@ fun SavingsItem()
                 {
                     Card(
                         modifier = Modifier
-                            .fillMaxSize(),
+                            .fillMaxSize()
+                            .clickable
+                            {
+                                navController.navigate(Screen.AllSavingsScreen.route)
+                            },
                         shape = RoundedCornerShape(LocalSpacing.current.MEDIUM),
                         backgroundColor = Color.White,
                         elevation = LocalSpacing.current.THIN

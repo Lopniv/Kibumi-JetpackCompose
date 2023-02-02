@@ -27,6 +27,7 @@ import androidx.navigation.NavController
 import com.compose.kibumi.R
 import com.compose.kibumi.feature.presentation.home.subscriptionPayment
 import com.compose.kibumi.feature.presentation.util.BottomNavigationScreen
+import com.compose.kibumi.feature.presentation.util.ButtonBoxGeneral
 import com.compose.kibumi.feature.presentation.util.Screen
 import com.compose.kibumi.ui.theme.LocalFontSize
 import com.compose.kibumi.ui.theme.LocalSpacing
@@ -123,22 +124,13 @@ fun CountDown(navController: NavController)
         Divider(thickness = LocalSpacing.current.TINY, color = Color.White)
         RowItem(R.drawable.icon_schedule_assignment, "Pickup Quota", "8 pickups left")
         //This button it additional for back to flow subscription
-        Button(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.White)
-                .padding(horizontal = LocalSpacing.current.MEDIUM, vertical = LocalSpacing.current.TINY),
-            colors = ButtonDefaults.buttonColors(backgroundColor = THEME_PRIMARY_NORMAL),
-            onClick =
-            {
-                navController.navigate(BottomNavigationScreen.Home.route ?: "")
-                {
-                    popUpTo(0)
-                }
-                subscriptionPayment = 0
-            })
+        ButtonBoxGeneral(Modifier.background(Color.White), "Cancel Subscription")
         {
-            Text(text = "Cancel Subscription", color = Color.White)
+            navController.navigate(BottomNavigationScreen.Home.route ?: "")
+            {
+                popUpTo(0)
+            }
+            subscriptionPayment = 0
         }
     }
 }

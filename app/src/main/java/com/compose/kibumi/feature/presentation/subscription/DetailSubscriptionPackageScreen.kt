@@ -24,6 +24,7 @@ import com.compose.kibumi.extension.convertToCurrency
 import com.compose.kibumi.extension.convertToStringThousandSeparator
 import com.compose.kibumi.feature.domain.`object`.getListSubscriptionPackage
 import com.compose.kibumi.feature.domain.model.SubscriptionPackageModel
+import com.compose.kibumi.feature.presentation.util.ButtonBoxGeneral
 import com.compose.kibumi.feature.presentation.util.Screen
 import com.compose.kibumi.feature.presentation.util.TopAppBarGeneral
 import com.compose.kibumi.ui.theme.*
@@ -75,27 +76,19 @@ fun DetailSubscriptionPackageScreen(navController: NavController, idProduct: Int
                     contentScale = ContentScale.Crop)
                 CardDetailPackage(modelSubscriptionPackage)
                 InformationPackage(modelSubscriptionPackage)
-                Button(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(LocalSpacing.current.MEDIUM),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = THEME_PRIMARY_NORMAL),
-                    onClick =
-                    {
-                        scope.launch()
-                        {
-                            if (sheetState.isCollapsed)
-                            {
-                                sheetState.expand()
-                            }
-                            else
-                            {
-                                sheetState.collapse()
-                            }
-                        }
-                    })
+                ButtonBoxGeneral(textButton = "Next")
                 {
-                    Text(text = "Next", color = Color.White)
+                    scope.launch()
+                    {
+                        if (sheetState.isCollapsed)
+                        {
+                            sheetState.expand()
+                        }
+                        else
+                        {
+                            sheetState.collapse()
+                        }
+                    }
                 }
             }
         }

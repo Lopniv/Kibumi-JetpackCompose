@@ -1,8 +1,8 @@
 package com.compose.kibumi.feature.presentation.notification
 
-import android.app.Notification
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -16,13 +16,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.compose.kibumi.feature.presentation.util.TopAppBarGeneral
-import com.compose.kibumi.ui.theme.LocalSpacing
 import com.compose.kibumi.R
 import com.compose.kibumi.feature.domain.model.NotificationModel
-import com.compose.kibumi.feature.presentation.activity.ItemActivity
+import com.compose.kibumi.feature.presentation.util.Screen
+import com.compose.kibumi.feature.presentation.util.TopAppBarGeneral
 import com.compose.kibumi.ui.theme.LocalFontSize
+import com.compose.kibumi.ui.theme.LocalSpacing
 import com.compose.kibumi.ui.theme.THEME_TERTIARY_LIGHT
+
+val listNotificationModel = getListNotification()
 
 @Composable
 fun NotificationScreen(navController: NavController)
@@ -34,35 +36,17 @@ fun NotificationScreen(navController: NavController)
         {
 
         }
-        val listNotification = arrayListOf(
-            NotificationModel(
-                Title = "Trash has been removed!",
-                Subtitle = "Your trash has been transported by kibi buddy. Keep it clean!",
-                Date = "12 August 2020"
-            ),
-            NotificationModel(
-                Title = "Subscription status is active",
-                Subtitle = "Laying of Kibumi sorting bins will be carried out in 2-3 days.",
-                Date = "12 August 2020"
-            ),
-            NotificationModel(
-                Title = "Yeay, Your address has been verified",
-                Subtitle = "Now you can use kibumi services",
-                Date = "12 August 2020"
-            ),
-            NotificationModel(
-                Title = "Welcome to Kibumi!",
-                Subtitle = "Hello, welcome and join Kibumi yaa..",
-                Date = "12 August 2020"
-            )
-        )
+
         LazyColumn(
             modifier = Modifier.background(Color.White),
             content =
             {
-                itemsIndexed(listNotification)
+                itemsIndexed(listNotificationModel)
                 { _, notificationModel ->
                     ItemNotification(notificationModel)
+                    {
+                        navController.navigate(Screen.DetailNotification.withArgs(notificationModel.ID.toString()))
+                    }
                 }
             })
     }
@@ -70,11 +54,13 @@ fun NotificationScreen(navController: NavController)
 
 @Composable
 fun ItemNotification(
-    notificationModel: NotificationModel
+    notificationModel: NotificationModel,
+    onClick: () -> Unit
 ) {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .heightIn(min = 100.dp))
+        .heightIn(min = 100.dp)
+        .clickable { onClick() })
     {
         Row(
             modifier = Modifier
@@ -93,19 +79,49 @@ fun ItemNotification(
             Column()
             {
                 Text(
-                    text = notificationModel.Title,
+                    text = notificationModel.Title ?: "",
                     fontSize = LocalFontSize.current.MEDIUM,
                     fontWeight = FontWeight.Bold)
                 Text(
-                    text = notificationModel.Subtitle,
+                    text = notificationModel.Subtitle ?: "",
                     fontSize = LocalFontSize.current.SMALL)
                 Text(
-                    text = notificationModel.Date,
+                    text = notificationModel.Date ?: "",
                     fontSize = LocalFontSize.current.DEFAULT)
             }
         }
         Divider(modifier = Modifier.fillMaxWidth().align(Alignment.BottomCenter),thickness = 1.dp, color = THEME_TERTIARY_LIGHT)
     }
+}
+
+private fun getListNotification(): ArrayList<NotificationModel>
+{
+    return arrayListOf(
+        NotificationModel(
+            ID = 0,
+            Title = "Trash has been removed!",
+            Subtitle = "Your trash has been transported by kibi buddy. Keep it clean!",
+            Date = "12 August 2020"
+        ),
+        NotificationModel(
+            ID = 1,
+            Title = "Subscription status is active",
+            Subtitle = "Laying of Kibumi sorting bins will be carried out in 2-3 days.",
+            Date = "12 August 2020"
+        ),
+        NotificationModel(
+            ID = 2,
+            Title = "Yeay, Your address has been verified",
+            Subtitle = "Now you can use kibumi services",
+            Date = "12 August 2020"
+        ),
+        NotificationModel(
+            ID = 3,
+            Title = "Welcome to Kibumi!",
+            Subtitle = "Hello, welcome and join Kibumi yaa..",
+            Date = "12 August 2020"
+        )
+    )
 }
 
 

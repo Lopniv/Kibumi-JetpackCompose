@@ -15,21 +15,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.compose.kibumi.feature.domain.model.SubscriptionPackageModel
-import com.compose.kibumi.feature.presentation.util.TopAppBarGeneral
-import com.compose.kibumi.ui.theme.LocalSpacing
-import com.compose.kibumi.ui.theme.THEME_TERTIARY_LIGHT
 import com.compose.kibumi.R
 import com.compose.kibumi.extension.convertToCurrency
 import com.compose.kibumi.extension.convertToStringThousandSeparator
 import com.compose.kibumi.feature.domain.`object`.getListSubscriptionPackage
-import com.compose.kibumi.feature.presentation.activity.ItemActivity
+import com.compose.kibumi.feature.domain.model.SubscriptionPackageModel
 import com.compose.kibumi.feature.presentation.util.Screen
+import com.compose.kibumi.feature.presentation.util.TopAppBarGeneral
 import com.compose.kibumi.ui.theme.LocalFontSize
+import com.compose.kibumi.ui.theme.LocalSpacing
 import com.compose.kibumi.ui.theme.THEME_TERTIARY_DARK
+import com.compose.kibumi.ui.theme.THEME_TERTIARY_LIGHT
 
 @Composable
 fun SubscriptionPackageScreen(navController: NavController)

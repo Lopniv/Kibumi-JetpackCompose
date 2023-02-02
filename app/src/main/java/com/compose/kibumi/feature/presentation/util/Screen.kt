@@ -9,8 +9,11 @@ sealed class Screen(val route: String)
     object SchedulePickup: Screen("schedule_pickup")
     object WasteSell: Screen("waste_sell")
     object Notification: Screen("notification")
+    object DetailNotification: Screen("detail_notification")
     object Profile: Screen("profile")
     object Address: Screen("address")
+    object ChangePassword: Screen("change_password")
+    object AllSavingsScreen: Screen("all_savings_screen")
 
     fun withArgs(vararg args: String): String
     {

@@ -23,8 +23,10 @@ import androidx.navigation.navArgument
 import com.compose.kibumi.R
 import com.compose.kibumi.feature.presentation.activity.ActivityScreen
 import com.compose.kibumi.feature.presentation.address.AddressScreen
+import com.compose.kibumi.feature.presentation.changepassword.ChangePasswordScreen
 import com.compose.kibumi.feature.presentation.home.HomeScreen
 import com.compose.kibumi.feature.presentation.market.MarketScreen
+import com.compose.kibumi.feature.presentation.notification.DetailNotificationScreen
 import com.compose.kibumi.feature.presentation.notification.NotificationScreen
 import com.compose.kibumi.feature.presentation.savings.SavingsScreen
 import com.compose.kibumi.feature.presentation.subscription.DetailSubmissionScreen
@@ -32,6 +34,7 @@ import com.compose.kibumi.feature.presentation.subscription.DetailSubscriptionPa
 import com.compose.kibumi.feature.presentation.payment.PaymentScreen
 import com.compose.kibumi.feature.presentation.pickup.SchedulePickupScreen
 import com.compose.kibumi.feature.presentation.profile.ProfileScreen
+import com.compose.kibumi.feature.presentation.savings.AllSavingsScreen
 import com.compose.kibumi.feature.presentation.subscription.SubscriptionPackageScreen
 import com.compose.kibumi.feature.presentation.wastesell.WasteSellScreen
 import com.compose.kibumi.ui.theme.LocalSpacing
@@ -165,6 +168,16 @@ fun MainScreenNavigation(
             SavingsScreen(navController, scaffoldState)
         }
 
+        //all savings screen
+        composable(Screen.AllSavingsScreen.route)
+        {
+            LaunchedEffect(Unit)
+            {
+                bottomBarState.value = false
+            }
+            AllSavingsScreen(navController)
+        }
+
         //product subscription
         composable(Screen.ProductSubscription.route)
         {
@@ -243,6 +256,24 @@ fun MainScreenNavigation(
             NotificationScreen(navController)
         }
 
+        //detail notification
+        composable(
+            route = Screen.DetailNotification.route + "/{id}",
+            arguments = listOf(
+                navArgument("id")
+                {
+                    type = NavType.IntType
+                    defaultValue = 0
+                    nullable = false
+                })
+        ) {
+            LaunchedEffect(Unit)
+            {
+                bottomBarState.value = false
+            }
+            DetailNotificationScreen(navController, it.arguments?.getInt("id") ?: 0)
+        }
+
         //profile
         composable(Screen.Profile.route)
         {
@@ -261,6 +292,16 @@ fun MainScreenNavigation(
                 bottomBarState.value = false
             }
             AddressScreen(navController)
+        }
+
+        //change password
+        composable(Screen.ChangePassword.route)
+        {
+            LaunchedEffect(Unit)
+            {
+                bottomBarState.value = false
+            }
+            ChangePasswordScreen(navController)
         }
     }
 }

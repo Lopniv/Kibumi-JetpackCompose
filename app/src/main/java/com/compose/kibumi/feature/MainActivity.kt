@@ -93,7 +93,11 @@ class MainActivity : ComponentActivity()
                                         navController.navigate(Screen.Address.route)
                                         closeDrawer(scope, scaffoldState)
                                     }
-                                    "change_password" -> return@DrawerBody
+                                    "change_password" ->
+                                    {
+                                        navController.navigate(Screen.ChangePassword.route)
+                                        closeDrawer(scope, scaffoldState)
+                                    }
                                     "help" -> return@DrawerBody
                                     "logout" -> return@DrawerBody
                                 }

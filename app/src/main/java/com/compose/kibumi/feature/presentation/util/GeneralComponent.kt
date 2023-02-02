@@ -163,6 +163,8 @@ fun TopAppBarHome(navController: NavController, color: Color, scaffoldState: Sca
 //endregion
 
 
+//region TOP APP BAR GENERAL - START
+
 @Composable
 fun TopAppBarGeneral(
     navController: NavController,
@@ -230,3 +232,42 @@ fun TopAppBarGeneral(
         }
     }
 }
+
+//endregion
+
+
+//region BUTTON GENERAL BOX - START
+
+@Composable
+fun ButtonBoxGeneral(modifier: Modifier = Modifier, textButton: String, onClick: () -> Unit)
+{
+    Button(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(LocalSpacing.current.MEDIUM),
+        colors = ButtonDefaults.buttonColors(backgroundColor = THEME_PRIMARY_NORMAL),
+        onClick = { onClick() })
+    {
+        Text(text = textButton, color = Color.White)
+    }
+}
+
+//endregion
+
+
+//region  - START
+
+@Composable
+fun TextFieldGeneralOutlined(value: String, label: String, modifier: Modifier = Modifier)
+{
+    OutlinedTextField(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = LocalSpacing.current.MEDIUM, vertical = LocalSpacing.current.LITTLE)
+            .background(Color.White),
+        value = value,
+        label = { Text(text = label) },
+        onValueChange = {})
+}
+
+//endregion
